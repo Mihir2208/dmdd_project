@@ -1,4 +1,5 @@
 DROP TABLE customer_address;
+DROP TABLE order_delivery_status;
 DROP TABLE order_details;
 DROP TABLE customer_order;
 DROP TABLE payment_type;
@@ -9,7 +10,7 @@ DROP TABLE product_manufacturer;
 DROP TABLE distributor;
 DROP TABLE product;
 DROP TABLE product_type;
-
+DROP TABLE delivery_partner;
 
 
 --Create Customer Table
@@ -95,3 +96,19 @@ Product_ID number(38) REFERENCES product (Product_ID),
 Order_ID number(38) REFERENCES customer_order (Order_ID));
 
 --desc order_details;
+
+--Create Order Delivery Partner
+create table delivery_partner(
+Delivery_partner_ID number(38) PRIMARY KEY,
+Delivery_partner_Name varchar2(50),
+Delivery_partner_PhoneNo varchar2(20),
+Deliver_partner_Email varchar2(100));
+
+--desc delivery_partner;
+
+create table order_delivery_status(
+Order_delivery_status_ID number(38) PRIMARY KEY,
+Order_delivery_status_Name varchar2(50),
+Order_ID number(38) REFERENCES customer_order (Order_ID),
+Delivery_partner_ID number(38) REFERENCES delivery_partner (Delivery_partner_ID)
+);
