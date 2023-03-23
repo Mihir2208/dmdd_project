@@ -1,6 +1,8 @@
 DROP TABLE customer_address;
-DROP TABLE customer;
+DROP TABLE order_details;
+DROP TABLE customer_order;
 DROP TABLE payment_type;
+DROP TABLE customer;
 alter table distributor drop COLUMN Product_manufacturer_ID;
 alter table product_manufacturer drop COLUMN Distributor_ID;
 DROP TABLE product_manufacturer;
@@ -76,3 +78,20 @@ Distributor_ID number(38),
 CONSTRAINT FK_Distributor_ID FOREIGN KEY (Distributor_ID) REFERENCES distributor(Distributor_ID));
 
 alter table distributor add CONSTRAINT FK_Product_manufacturer_ID FOREIGN KEY (Product_manufacturer_ID) REFERENCES product_manufacturer(Product_manufacturer_ID);
+
+--Create Customer Order Table 
+create table customer_order(
+Order_ID number(38) PRIMARY KEY,
+Order_date date,
+Payment_type_ID number(38) REFERENCES payment_type (Payment_type_ID),
+CustomerID number(38) REFERENCES customer (CustomerID));
+
+--desc customer_order;
+
+--Create Order Details Table
+create table order_details(
+Order_details_ID number(38) PRIMARY KEY,
+Product_ID number(38) REFERENCES product (Product_ID),
+Order_ID number(38) REFERENCES customer_order (Order_ID));
+
+--desc order_details;
