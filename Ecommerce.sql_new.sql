@@ -1,0 +1,78 @@
+insert into product_type (Product_type_ID, Product_type_name, Product_Description) values (1, 'Computer', 'Major contusion of left kidney, subsequent encounter');
+insert into product_type (Product_type_ID, Product_type_name, Product_Description) values (2, 'Pet', 'Other myositis, left lower leg');
+insert into product_type (Product_type_ID, Product_type_name, Product_Description) values (3, 'Beauty', 'Subluxation of tarsometatarsal joint of unspecified foot, initial encounter');
+insert into product_type (Product_type_ID, Product_type_name, Product_Description) values (4, 'Sports', 'Nasopharyngeal myiasis');
+insert into product_type (Product_type_ID, Product_type_name, Product_Description) values (5, 'Headphones', 'Legal intervention involving injury by tear gas, law enforcement official injured, initial encounter');
+insert into product_type (Product_type_ID, Product_type_name, Product_Description) values (6, 'Electronics', 'Legal intervention involving unspecified firearm discharge, law enforcement official injured, sequela');
+insert into product_type (Product_type_ID, Product_type_name, Product_Description) values (7, 'Food and Gorcery', 'Traumatic hemorrhage of right cerebrum with loss of consciousness of unspecified duration, initial encounter');
+insert into product_type (Product_type_ID, Product_type_name, Product_Description) values (8, 'Lifestyle', 'Nondisplaced fracture of anterior wall of unspecified acetabulum, initial encounter for open fracture');
+insert into product_type (Product_type_ID, Product_type_name, Product_Description) values (9, 'Clothes', 'Other physeal fracture of upper end of unspecified fibula, sequela');
+insert into product_type (Product_type_ID, Product_type_name, Product_Description) values (10, 'Books', 'Displaced fracture of neck of scapula, left shoulder, subsequent encounter for fracture with malunion');
+
+
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (1, 1, 'apple', 773, 'Out of stock', 26);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (2, 2, 'dog lotion', 117, 'Out of stock', 80);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (3, 3, 'beauty soap', 189, 'In stock', 88);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (4, 4, 'cricket bat', 249, 'Out of stock', 16);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (5, 5, 'sony', 142, 'Out of stock', 53);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (6, 6, 'Tv', 823, 'Out of stock', 8);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (7, 7, 'Tomatoes', 691, 'Out of stock', 10);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (8, 8, 'Plants', 571, 'Out of stock', 45);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (9, 9, 'Hm', 519, 'Out of stock', 10);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (10, 10, 'a', 1055, 'Out of stock', 40);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (11, 1, 'acer', 1473, 'Out of stock', 74);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (12, 2, 'small pet soap', 258, 'Out of stock', 41);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (13, 3, 'beauty lotion', 1390, 'Out of stock', 9);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (14, 4, 'football', 1170, 'Out of stock', 99);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (15, 5, 'jbl', 130, 'In stock', 87);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (16, 6, 'watch', 1217, 'In stock', 70);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (17, 7, 'lettuce', 1130, 'In stock', 11);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (18, 8, 'Dining Table', 638, 'Out of stock', 99);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (19, 9, 'zara', 148, 'In stock', 9);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (20, 10, 'b', 329, 'In stock', 10);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (21, 1, 'asus', 1395, 'Out of stock', 87);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (22, 2, 'horse hair cleaner', 438, 'Out of stock', 71);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (23, 3, 'fair and lovely', 1494, 'In stock', 36);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (24, 4, 'cricket ball', 987, 'Out of stock', 85);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (25, 5, 'apple airpods', 1194, 'In stock', 33);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (26, 6, 'apple watch', 500, 'In stock', 99);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (27, 7, 'Banana', 485, 'In stock', 89);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (28, 8, 'Fancy lights', 615, 'In stock', 62);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (29, 9, 'gucci', 1366, 'In stock', 69);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (30, 10, 'c', 613, 'In stock', 71);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (31, 1, 'dell', 1070, 'Out of stock', 76);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (32, 2, 'cat lotion', 1125, 'Out of stock', 61);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (33, 3, 'face wash', 928, 'In stock', 37);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (34, 4, 'tennis ball', 124, 'In stock', 62);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (35, 5, 'nothing ear 1', 682, 'Out of stock', 99);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (36, 6, 'Speaker', 1369, 'Out of stock', 42);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (37, 7, 'Onions', 762, 'In stock', 14);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (38, 8, 'Photo Frames', 781, 'Out of stock', 23);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (39, 9, 'prada', 56, 'In stock', 76);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (40, 10, 'd', 1070, 'In stock', 17);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (41, 1, 'lenovo', 830, 'In stock', 10);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (42, 2, 'pet care', 344, 'Out of stock', 34);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (43, 3, 'shower gel', 225, 'In stock', 77);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (44, 4, 'ping pong ball', 350, 'Out of stock', 53);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (45, 5, 'soundcore', 1323, 'In stock', 44);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (46, 6, 'Mobile phones', 1244, 'Out of stock', 57);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (47, 7, 'Potatoes', 1154, 'In stock', 40);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (48, 8, 'Poster', 37, 'In stock', 41);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (49, 9, 'burberry', 417, 'Out of stock', 47);
+insert into product (Product_ID, Product_type_ID, Product_name, Product_cost, Product_active, Product_quantity) values (50, 10, 'e', 500, 'Out of stock', 72);
+
+
+INSERT INTO product_manufacturer VALUES (1, null);
+
+INSERT INTO distributor VALUES (1, 1, 1, 10);
+INSERT INTO distributor VALUES (2, 22, 1, 20);
+INSERT INTO distributor VALUES (3, 3, 1, 30);
+INSERT INTO distributor VALUES (4, 46, 1, 30);
+INSERT INTO distributor VALUES (5, 31, 1, 30);
+INSERT INTO distributor VALUES (6, 24, 1, 30);
+INSERT INTO distributor VALUES (7, 1, 1, 30);
+INSERT INTO distributor VALUES (8, 20, 1, 30);
+INSERT INTO distributor VALUES (9, 50, 1, 30);
+INSERT INTO distributor VALUES (10, 36, 1, 30);
+
+UPDATE product_manufacturer SET Distributor_ID = 1 WHERE Product_manufacturer_ID = 1;
