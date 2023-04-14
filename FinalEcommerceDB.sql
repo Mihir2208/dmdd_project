@@ -170,4 +170,34 @@ END;
 exec customer_order_report(1, '01-JAN-2022','01-JAN-2023');
 
 
+--9  Procedure takes a product type name as input and generates a report of the total sales for that product type
+set serveroutput on;
+CREATE OR REPLACE PROCEDURE product_sales_report (
+    p_product_type_name IN VARCHAR2
+) IS
+    l_product_type_id NUMBER(38);
+    l_total_sales NUMBER(38);
+    l_report_date DATE := SYSDATE;
+BEGIN
+    -- Get the product type ID for the given product type name
+    SELECT Product_type_ID INTO l_product_type_id
+    FROM product_type
+    WHERE Product_type_name = p_product_type_name;
+
+    -- Get the total sales for the given product type
+    SELECT SUM(Product_cost * Product_quantity) INTO l_total_sales
+    FROM product
+    WHERE Product_type_ID = l_product_type_id;
+
+    -- Generate the sales report
+    DBMS_OUTPUT.PUT_LINE('Product Type Sales Report');
+    DBMS_OUTPUT.PUT_LINE('-------------------------');
+    DBMS_OUTPUT.PUT_LINE('Report Date: ' || l_report_date);
+    DBMS_OUTPUT.PUT_LINE('Product Type: ' || p_product_type_name);
+    DBMS_OUTPUT.PUT_LINE('Total Sales: $' || l_total_sales);
+END;
+
+
+exec product_sales_report('Computer');
+
 
