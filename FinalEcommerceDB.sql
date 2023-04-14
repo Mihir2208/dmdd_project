@@ -201,3 +201,23 @@ END;
 exec product_sales_report('Computer');
 
 
+--10   Procedure joins several tables to get the necessary information about the order delivery status, delivery partner, and associated orders and products. It then groups the results by delivery partner and order delivery status and calculates the total number of orders and revenue for each combination. 
+set serveroutput on;
+CREATE OR REPLACE PROCEDURE order_delivery_status_report AS
+  CURSOR order_delivery_cursor IS
+    SELECT ods.Order_ID, ods.Order_delivery_status_Name, ods.Delivery_partner_ID, dp.Delivery_partner_Name, COUNT(*) AS Total_orders, SUM(p.Product_cost) AS Total_revenue
+    FROM order_delivery_status ods
+    INNER JOIN delivery_partner dp ON ods.Delivery_partner_ID = dp.Delivery_partner_ID
+    INNER JOIN customer_order co ON ods.Order_ID = co.Order_ID
+    INNER JOIN order_details od ON co.Order_ID = od.Order_ID
+    INNER JOIN product p ON od.Product_ID = p.Product_ID
+    GROUP BY ods.Order_ID, ods.Order_delivery_status_Name, ods.Delivery_partner_ID, dp.Delivery_partner_Name
+    ORDER BY dp.Delivery_partner_Name;
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Delivery Partner Name | Order Delivery Status | Total Orders | Total Revenue');
+  FOR order_delivery IN order_delivery_cursor LOOP
+    DBMS_OUTPUT.PUT_LINE(order_delivery.Delivery_partner_Name || ' | ' || order_delivery.Order_delivery_status_Name || ' | ' || order_delivery.Total_orders || ' | $' || order_delivery.Total_revenue);
+  END LOOP;
+END;
+
+exec order_delivery_status_report;
