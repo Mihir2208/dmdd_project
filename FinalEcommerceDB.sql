@@ -261,7 +261,7 @@ exec in_demand_report;
 
 
 
---1 Funtion for getting Category Revenues
+--1 Function for getting Category Revenues
 
 CREATE OR REPLACE FUNCTION get_category_revenues
 RETURN SYS_REFCURSOR
@@ -282,6 +282,19 @@ END;
 
 select get_category_revenues from dual;
 
+
+
+--1 index on Order_Details table to improve performance of queries joining it with Product and Category tables:
+CREATE INDEX idx_order_details_prod_cat1 
+ON Order_Details(Product_ID, ORDER_ID,  ORDER_DETAILS_ID);
+
+-- 2 Indexes for the Order_Details table
+CREATE INDEX idx_order_details_product_id ON Order_Details (Product_ID);
+CREATE INDEX idx_order_details_order_id ON Order_Details (Order_ID);
+
+-- 3 Indexes for the Customers table
+CREATE INDEX idx_customers_email ON Customer (Customer_Email);
+CREATE INDEX idx_customers_state ON Customer_Address(State);
 
 
 
