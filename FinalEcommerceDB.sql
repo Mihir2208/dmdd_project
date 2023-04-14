@@ -70,3 +70,58 @@ END;
 
 exec order_cost_report('01-JAN-2022','01-JAN-2023');
 
+--5 Procedure for Product Sales Report by Month
+set serveroutput on;
+CREATE OR REPLACE PROCEDURE product_sales_report_by_month IS
+BEGIN
+  FOR month IN 1..12 LOOP
+    DBMS_OUTPUT.PUT_LINE('Month ' || month || ' Product Sales Report:');
+    DBMS_OUTPUT.PUT_LINE('Product Name | Total Sales');
+    FOR product_sale IN (SELECT p.Product_name, SUM(p.Product_quantity * p.Product_cost) as Total_Sales
+                         FROM product p
+                         INNER JOIN order_details od ON p.Product_ID = od.Product_ID
+                         INNER JOIN customer_order co ON od.Order_ID = co.Order_ID
+                         WHERE EXTRACT(MONTH FROM co.Order_date) = month
+                         GROUP BY p.Product_name) LOOP
+      DBMS_OUTPUT.PUT_LINE(product_sale.Product_name || ' | ' || product_sale.Total_Sales);
+    END LOOP;
+  END LOOP;
+END;
+
+exec product_sales_report_by_month;
+
+--6 Procedure will generate a report that shows the order history of a specific customer.
+set serveroutput on;
+CREATE OR REPLACE PROCEDURE customer_order_history(
+  p_customer_id IN NUMBER
+) IS
+BEGIN
+  FOR order_history IN (SELECT co.Order_ID, co.Order_date, p.Product_name, p.Product_quantity, od.Order_details_ID, ods.Order_delivery_status_Name, dp.Delivery_partner_Name
+                        FROM customer_order co
+                        INNER JOIN order_details od ON co.Order_ID = od.Order_ID
+                        INNER JOIN product p ON od.Product_ID = p.Product_ID
+                        INNER JOIN order_delivery_status ods ON co.Order_ID = ods.Order_ID
+                        INNER JOIN delivery_partner dp ON ods.delivery_partner_id = dp.delivery_partner_id
+                        WHERE co.CustomerID = p_customer_id) LOOP
+    DBMS_OUTPUT.PUT_LINE('Order ID: ' || order_history.Order_ID || ' | Order Date: ' || order_history.Order_date || ' | Product Name: ' || order_history.Product_name || ' | Quantity: ' || order_history.Product_quantity || ' | Order Details ID: ' || order_history.Order_details_ID || ' | Delivery Status: ' || order_history.Order_delivery_status_Name || ' | Delivery Partner Name: ' || order_history.Delivery_partner_Name);
+  END LOOP;
+END;
+
+exec customer_order_history(10);
+
+--7 Procedure will generate a report that shows the current inventory of each product by distributor.
+set serveroutput on;
+CREATE OR REPLACE PROCEDURE distributor_inventory_report IS
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Distributor Inventory Report:');
+  DBMS_OUTPUT.PUT_LINE('Distributor ID | Product Name | Product Quantity');
+  FOR distributor_inventory IN (SELECT d.Distributor_ID, p.Product_name, d.Product_Quantity
+                                 FROM distributor d
+                                 INNER JOIN product p ON d.Product_ID = p.Product_ID
+                                 INNER JOIN product_manufacturer pm ON d.Product_manufacturer_ID = pm.Product_manufacturer_ID) LOOP
+    DBMS_OUTPUT.PUT_LINE(distributor_inventory.Distributor_ID || ' | ' || distributor_inventory.Product_name || ' | ' || distributor_inventory.Product_Quantity);
+  END LOOP;
+END;
+
+exec distributor_inventory_report;
+
