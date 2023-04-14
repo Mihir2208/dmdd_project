@@ -88,3 +88,21 @@ BEGIN
 END;
 /
 select calculate_order_total(6) from dual;
+
+-- Function to retrieve all customers along with their addresses:
+
+CREATE OR REPLACE FUNCTION get_customers_with_addresses
+RETURN SYS_REFCURSOR
+IS
+  v_cur SYS_REFCURSOR;
+BEGIN
+  OPEN v_cur FOR
+    SELECT c.*, ca.Street, ca.State, ca.City, ca.Zip
+    FROM customer c
+    LEFT JOIN customer_address ca ON c.CustomerID = ca.CustomerID;
+
+  RETURN v_cur;
+END;
+/
+
+select get_customers_with_addresses() from dual;
