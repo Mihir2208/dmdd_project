@@ -260,3 +260,29 @@ exec in_demand_report;
 
 
 
+
+--1 Funtion for getting Category Revenues
+
+CREATE OR REPLACE FUNCTION get_category_revenues
+RETURN SYS_REFCURSOR
+IS
+  category_revenues SYS_REFCURSOR;
+BEGIN
+  OPEN category_revenues FOR
+    SELECT c.Product_Type_Name, SUM(p.Product_Cost * p.Product_Quantity) AS Total_Revenue
+    FROM Order_Details o
+    JOIN Product p ON o.Product_ID = p.Product_ID
+    JOIN Product_Type c ON p.Product_Type_Id = c.Product_Type_Id
+    GROUP BY c.Product_Type_Name;
+
+
+
+  RETURN category_revenues;
+END;
+
+select get_category_revenues from dual;
+
+
+
+
+
