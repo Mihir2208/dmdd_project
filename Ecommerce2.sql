@@ -60,3 +60,31 @@ END;
 /
 
 select get_customer_count_with_orders('01-JAN-2022','31-DEC-2022') from dual;
+
+CREATE OR REPLACE FUNCTION calculate_order_total(order_id IN NUMBER)
+RETURN NUMBER
+IS
+  total_cost NUMBER := 0;
+BEGIN
+  SELECT SUM(p.Product_cost * p.Product_quantity) INTO total_cost
+  FROM order_details od
+  INNER JOIN product p ON od.Product_ID = p.Product_ID
+  WHERE od.Order_ID = order_id;
+
+  RETURN total_cost;
+EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+    RETURN 0;
+END;
+/
+
+-- Example SELECT statement to print the output of the function
+DECLARE
+  order_id NUMBER := 2; -- Replace with the desired order ID
+  total_cost NUMBER;
+BEGIN
+  total_cost := calculate_order_total(order_id);
+  DBMS_OUTPUT.PUT_LINE('Total Cost for Order ID ' || order_id || ': $' || total_cost);
+END;
+/
+select calculate_order_total(6) from dual;
