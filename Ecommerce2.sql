@@ -41,3 +41,22 @@ END;
 
 
 exec   sales_by_zip_report('38104');
+
+-- Create a complex function to retrieve count of customers with orders within a date range
+CREATE OR REPLACE FUNCTION get_customer_count_with_orders(p_start_date IN DATE, p_end_date IN DATE)
+RETURN NUMBER
+IS
+  v_customer_count NUMBER := 0;
+BEGIN
+  SELECT COUNT(DISTINCT co.CustomerID) INTO v_customer_count
+  FROM customer_order co
+  WHERE co.Order_date BETWEEN p_start_date AND p_end_date;
+
+  RETURN v_customer_count;
+EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+    RETURN 0;
+END;
+/
+
+select get_customer_count_with_orders('01-JAN-2022','31-DEC-2022') from dual;
