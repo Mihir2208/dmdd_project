@@ -221,3 +221,42 @@ BEGIN
 END;
 
 exec order_delivery_status_report;
+
+--11  A Procedure that generates a report on the most in-demand and least in-demand products based on the number of orders they've received:
+set serveroutput on;
+CREATE OR REPLACE PROCEDURE in_demand_report IS
+  CURSOR most_in_demand_cursor IS
+    SELECT p.Product_name, COUNT(od.Order_details_ID) AS order_count
+    FROM order_details od
+    INNER JOIN product p ON od.Product_ID = p.Product_ID
+    GROUP BY p.Product_name
+    ORDER BY order_count DESC;
+    
+  CURSOR least_in_demand_cursor IS
+    SELECT p.Product_name, COUNT(od.Order_details_ID) AS order_count
+    FROM order_details od
+    INNER JOIN product p ON od.Product_ID = p.Product_ID
+    GROUP BY p.Product_name
+    ORDER BY order_count ASC;
+    
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Most In-Demand Products');
+  DBMS_OUTPUT.PUT_LINE('Product Name | Order Count');
+  
+  FOR product IN most_in_demand_cursor LOOP
+    DBMS_OUTPUT.PUT_LINE(product.Product_name || ' | ' || product.order_count);
+  END LOOP;
+  
+  DBMS_OUTPUT.PUT_LINE('Least In-Demand Products');
+  DBMS_OUTPUT.PUT_LINE('Product Name | Order Count');
+  
+  FOR product IN least_in_demand_cursor LOOP
+    DBMS_OUTPUT.PUT_LINE(product.Product_name || ' | ' || product.order_count);
+  END LOOP;
+END;
+
+exec in_demand_report;
+
+
+
+
