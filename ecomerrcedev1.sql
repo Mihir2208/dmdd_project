@@ -551,3 +551,81 @@ END;
 select get_category_revenues from dual;
 
 */
+
+
+-- Function to retrieve all customers along with their addresses:
+/*
+CREATE OR REPLACE FUNCTION get_customers_with_addresses
+RETURN SYS_REFCURSOR
+IS
+  v_cur SYS_REFCURSOR;
+BEGIN
+  OPEN v_cur FOR
+    SELECT c.*, ca.Street, ca.State, ca.City, ca.Zip
+    FROM customer c
+    LEFT JOIN customer_address ca ON c.CustomerID = ca.CustomerID;
+
+  RETURN v_cur;
+END;
+/
+
+select get_customers_with_addresses() from dual;
+*/
+
+--Function to retrieve the average product cost for a given product type:
+/*
+CREATE OR REPLACE FUNCTION get_average_product_cost(p_product_type_id IN NUMBER)
+RETURN NUMBER
+IS
+  v_average_product_cost NUMBER;
+BEGIN
+  SELECT AVG(Product_cost) INTO v_average_product_cost
+  FROM product
+  WHERE Product_type_ID = p_product_type_id;
+
+  RETURN v_average_product_cost;
+EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+    RETURN 0;
+END;
+/
+select get_average_product_cost(3) from dual;
+*/
+
+
+-- Function get order details
+/*
+CREATE OR REPLACE FUNCTION get_order_details(p_order_id IN NUMBER)
+RETURN VARCHAR2
+IS
+  v_result VARCHAR2(500);
+BEGIN
+  SELECT 'Order ID: ' || co.Order_ID || ', Order Date: ' || TO_CHAR(co.Order_date, 'DD-MON-YYYY') ||
+         ', Customer Name: ' || c.Customer_FirstName || ' ' || c.Customer_LastName ||
+         ', Payment Type: ' || pt.Payment_type_name ||
+         ', Product Name: ' || p.Product_name || ', Product Cost: $' || TO_CHAR(p.Product_cost, '9999.99') ||
+         ', Product Quantity: ' || p.Product_quantity ||
+         ', Delivery Status: ' || ods.Order_delivery_status_Name ||
+         ', Delivery Partner: ' || dp.Delivery_partner_Name || ' (' || dp.Delivery_partner_PhoneNo || ')' INTO v_result
+  FROM customer_order co
+  INNER JOIN customer c ON co.CustomerID = c.CustomerID
+  INNER JOIN payment_type pt ON co.Payment_type_ID = pt.Payment_type_ID
+  INNER JOIN order_details od ON co.Order_ID = od.Order_ID
+  INNER JOIN product p ON od.Product_ID = p.Product_ID
+  INNER JOIN order_delivery_status ods ON co.Order_ID = ods.Order_ID
+  INNER JOIN delivery_partner dp ON ods.Delivery_partner_ID = dp.Delivery_partner_ID
+  WHERE co.Order_ID = p_order_id;
+
+  RETURN v_result;
+EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+    RETURN 'Order not found';
+  WHEN OTHERS THEN
+    RAISE;
+END;
+/
+
+SELECT get_order_details(1) AS order_details
+FROM dual;
+*/
+commit;
